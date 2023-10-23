@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/69e2443572.js" crossorigin="anonymous"></script>
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/fontello.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <title>ТЗ</title>
+</head>
+<body>
+  <body class="text-center justify-content-center">
+
+    <nav class="navbar navbar-expand-lg" style="background-color: rgba(106,213,148,1)!important;">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<div class="container justify-content-center mx-auto mb-5 row pa">
+  <div class="row justify-content-center mt-5">
+
+{% from "_formhelpers.html" import render_field %}
+    <div class="content-section">
+      <div class="media">
+        <div class="media-body">
+          <h2>{% block title %} Редактировать информацию о compani {% endblock %}</h2>
+        </div>
+      </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.csrf_token() }}
+            <fieldset class="form-group">
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <span class="text-danger">{{ message }}</span>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+                <legend class="heading">Изменение информации</legend>
+                {{ render_field(form.campaning_name, class_="form-control m-auto")}}
+                {{ render_field(form.collection_pointer, class_="form-control m-auto")}}
+                {{ render_field(form.attempts, class_="form-control m-auto")}}
+                {{ render_field(form.license_in_use, class_="form-control m-auto")}}
+                {{ render_field(form.first_call_time, class_="form-control m-auto")}}
+                {{ render_field(form.last_call_time, class_="form-control m-auto")}}
+                {{ render_field(form.buffer_pointer, class_="form-control m-auto")}}
+                {{ render_field(form.status, class_="form-control m-auto")}}
+
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>

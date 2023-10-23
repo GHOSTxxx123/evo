@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/69e2443572.js" crossorigin="anonymous"></script>
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/fontello.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <title>ТЗ</title>
+</head>
+<body>
+  <body class="text-center justify-content-center">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <img class="" src="{{ url_for('static', filename='img/EvoTech_Logo1.png') }}" width="120">
+          </ul>
+          <div class="d-flex">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="navbar-brand" href="/">Кампании</a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="/create_product">Создать кампанию</a>
+              </li>
+              <li class="nav-item">
+                <a class="navbar-brand" href="/sign_in">Вход</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+<div class="container justify-content-center mx-auto mb-5 row pa">
+  <div class="row justify-content-center mt-5">
+
+    <h1 class="display-4 fw-bold text-body-emphasis">Детали кампании</h1>
+
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            {% if is_admin == True %}
+          <div class="d-grid d-md-flex justify-content-start mb-4">
+            <form action="{{ url_for('delete', compani_id=product.id) }}" method="POST">
+              <button class='btn btn-danger btn-lg px-4 me-md-2' type="submit" value="Delete" onclick="return confirm('Delete compani?')"><i class="fa fa-times"></i> Удалить</button>
+            </form>
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
+              <a href="{{ url_for('edit', compani_id=product.id) }}" style="color:white">Edit</a>
+            </button>
+          </div>
+          {% endif %}
+            {% if product.Status == "stop" %}
+            <h5 class="card-title">Status : <p class="text-danger">{{ product.Status }}</p> </h5>
+          {% elif product.Status == "start" %}
+          <h5 class="card-title">Status : <p class="text-success">{{ product.Status }}</p> </h5>
+          {% elif product.Status == "pause" %}
+          <h5 class="card-title">Status : <p class="text-secondary">{{ product.Status }}</p> </h5>
+            {% endif %}
+            <hr>
+            <h5 class="card-title mt-1">Collection Pointer : {{product.Collection_Pointer}}</h5>
+            <hr>
+            <h5 class="card-title mt-1">Buffer Pointer : {{product.Buffer_Pointer}}</h5>
+            <hr>
+            <h5 class="card-title mt-1">Attempts : {{product.Attempts}}</h5>
+            <hr>
+            <h5 class="card-title mt-1">License in use : {{product.License_In_Use}}</h5>
+            <hr>
+            <h5 class="card-title mt-1">First call time : {{product.First_Call_Time}}</h5>
+            <hr>
+            <h5 class="card-title mt-1">Last call time : {{product.Last_Call_Time}}</h5>
+            <hr>
+            <h5 class="card-title mt-1">Campaning Data : {{product.Campaning_Data}}</h5>
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4">{{ product.Campaning_Name }}</h1>
+          </div>
+          
+        </div>
+      </div>
+    
+  </div>
+</div>
+
+  </body>
+</html>
